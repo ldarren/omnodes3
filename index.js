@@ -32,7 +32,6 @@ server.on('error', err => {
 })
 
 server.on('message', (msg, rinfo) => {
-	console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`)
 	s3.putObject(Object.assign(s3PutOpt, {
 		Key: Date.now() + '-' + pStr.rand(),
 		Body: msg,
