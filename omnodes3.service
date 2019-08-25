@@ -1,0 +1,23 @@
+[Unit]
+Description=UDP -> S3 Service
+After=network.target syslog.target
+
+[Service]
+User=ldarren
+Group=ldarren
+WorkingDirectory=/opt/apps/omnodes3
+ExecStart=/home/ldarren/.nvm/versions/node/v10.5.0/bin/node index.js -b kloudkonsole-log -s xin-node
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+#Change this to find app logs in /var/log/syslog
+SyslogIdentifier=omnodes3
+# Followig will require if you are using the PORT or Node from Envirnoment
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
